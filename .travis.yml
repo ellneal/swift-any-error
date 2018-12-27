@@ -1,0 +1,25 @@
+matrix:
+  include:
+  - os: osx
+    language: objective-c
+    osx_image: xcode10.1
+    script: make lint
+  - os: osx
+    language: objective-c
+    osx_image: xcode10.1
+    script: make build
+  - os: osx
+    language: objective-c
+    osx_image: xcode10.1
+    script:
+    - brew install carthage
+    - swift package generate-xcodeproj
+    - carthage build --archive
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    secure: Oq6QKqnb3jRMFYxHKhem/yz+9OlKiVwRWuZ/m09hic0BiRANmefpQ3jgO0MmhlG48X7ShXSoa5SFBCXCVA14kK16kp7OBxrkyAz7Sn8cpcQFQOoOKZAbFgsO/TVhICJqnlH8qjD4ymDUpbrPZ7W2yen5PjGQPvrLgZpYdf8EwV85Nz4OiSvzRm4Ui/tFdShtXyhGVLUZSb1PCOsWD0FaNFT8jVNApl8aozw08b1Ra1S3XExhtabFz9QRt/JVVFD+myWFinZGNvy7owwvref4RR9kYzf5XflEyDAOpp1nlRKszhW1B9KvjnOaMipXYsioyCziw0Te9o9JeoBdNMtKvF4TqBaZ6i3/5B1C9/tiCamjCNHl5Ags4gU9ba4Z3TtrjYwTf83YvTFQ9DIRjnAEbxEhx09o7M9P9vTrVz2oblk1z7MnvX4kOEZERQ7NbT44eyWpked3GTGZPXxTOW5N5nfO09Uzi9PFydrOCkTqLIu335ompwuEaIQ0Pa6zdU/6iORhb74jB1dJJvl4sFGxzmAH4JIjPF9Sw2IOUMX/GhgMmSqroHAJRgrd6vHrVoz8SPDrrhz/JY09UVC7+AhKz/sMSEXlzRxFgP2hDKpbPCq6mvYl/nE+y+Gcyoh/uljdhaoW930uT+FqIwdtoe3To4ImYwU0IDpveqvUw1aKVEc=
+  file: AnyError.framework.zip
+  on:
+    tags: true
