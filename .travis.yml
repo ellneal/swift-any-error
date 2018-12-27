@@ -11,14 +11,12 @@ matrix:
     osx_image: xcode10.1
     script: make build
   - os: osx
-    stage: archive
+    stage: deploy
     language: objective-c
     osx_image: xcode10.1
     script:
     - brew install carthage
     - make archive
-  - stage: deploy
-    script: skip
     deploy:
       provider: releases
       skip_cleanup: true
